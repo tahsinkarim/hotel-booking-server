@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/", function (req, res) {
-  console.log("hello world");
+  res.send("hello world");
 });
 
 app.listen(port, () => {
