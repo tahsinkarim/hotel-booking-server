@@ -15,7 +15,7 @@ app.use(express.json());
 
 const connect = async () => {
   try {
-    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
+    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
     mongoose.set("strictQuery", true);
     const db = await mongoose.connect(MONGO_URI);
 
