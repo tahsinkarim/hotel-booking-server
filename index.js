@@ -13,15 +13,16 @@ const port = process.env.PORT || 3000;
 
 const connect = async () => {
   try {
-    mongoose.set("strictQuery", true);
-    mongoose.connect(process.env.MONGO_URI, {
+    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
+    await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useFindAndModify: false,
       useUnifiedTopology: true,
+      strictQuery: true,
     });
     console.log("Connected to MongoDB");
   } catch (err) {
-    return console.error(errors);
+    console.error(errors);
   }
 };
 
