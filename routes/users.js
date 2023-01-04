@@ -16,9 +16,7 @@ router.post("/", createUser);
 router.get("/:id", getUser);
 
 //READ ALL
-router.get("/", (req, res) => {
-  res.send("Hello");
-});
+router.get("/", getAllUser);
 
 //UPDATE
 router.put("/:id", updateUser);

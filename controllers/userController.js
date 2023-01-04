@@ -21,12 +21,13 @@ export const getUser = async (req, res, next) => {
 };
 
 export const getAllUser = async (req, res, next) => {
-  try {
-    const hotels = await User.find();
-    res.status(200).json(hotels);
-  } catch (err) {
-    next(err);
-  }
+  res.send("Hello from function");
+  // try {
+  //   const hotels = await User.find();
+  //   res.status(200).json(hotels);
+  // } catch (err) {
+  //   next(err);
+  // }
 };
 export const updateUser = async (req, res, next) => {
   try {
