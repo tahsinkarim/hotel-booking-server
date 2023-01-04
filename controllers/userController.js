@@ -21,8 +21,6 @@ export const getUser = async (req, res, next) => {
 };
 
 export const getAllUser = async (req, res, next) => {
-  res.send("Hello from function");
-
   const users = await User.find();
 
   res.status(200).json(users);
