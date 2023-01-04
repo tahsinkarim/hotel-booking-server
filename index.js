@@ -17,21 +17,19 @@ const connect = async () => {
   try {
     const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
     mongoose.set("strictQuery", true);
-    mongoose.connect(MONGO_URI);
+    const db = await mongoose.connect(MONGO_URI);
 
-    console.log("Connected to MongoDB");
-  } catch (err) {
-    console.error(err);
+    const { name, host } = db.connection;
+
+    console.log(`Connected to MongoDB ${name} ${host}`);
+  } catch (error) {
+    console.error(error);
   }
 };
 
 mongoose.connection.on("disconnected", () => {
   console.log("Disconnected from MongoDB");
 });
-
-//Middleweres
-
-//Route Middleweres
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);

@@ -13,7 +13,9 @@ const router = express.Router();
 router.post("/", createUser);
 
 //READ BY ID
-router.get("/:id", getUser);
+router.get("/:id", () => {
+  resizeBy.send("Hello there");
+});
 
 //READ ALL
 router.get("/", getAllUser);
