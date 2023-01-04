@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 
 const app = express();
 dotenv.config();
-const port = process.env.PORT || 8800;
+const port = process.env.PORT || 3000;
 
 const connect = async () => {
   try {
@@ -31,7 +31,6 @@ mongoose.connection.on("disconnected", () => {
 //Middleweres
 app.use(cors());
 app.use(express.json());
-mongoose.set("strictQuery", false);
 
 //Route Middleweres
 app.use("/api/auth", authRoute);
