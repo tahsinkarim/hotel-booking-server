@@ -13,12 +13,12 @@ const router = express.Router();
 router.post("/", createUser);
 
 //READ BY ID
-router.get("/:id", () => {
-  resizeBy.send("Hello there");
-});
+router.get("/:id", getUser);
 
 //READ ALL
-router.get("/", getAllUser);
+router.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 //UPDATE
 router.put("/:id", updateUser);
