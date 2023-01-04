@@ -6,11 +6,11 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 3000;
-const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
+const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
 const connect = async () => {
   try {
     const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
-    await mongoose.connect(MONGO_URI, {
+    mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useFindAndModify: false,
       // useUnifiedTopology: true,
@@ -35,6 +35,7 @@ import authRoute from "./routes/auth.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import usersRoute from "./routes/users.js";
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
