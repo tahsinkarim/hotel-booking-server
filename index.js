@@ -2,21 +2,26 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import authRoute from "./routes/auth.js";
+import hotelsRoute from "./routes/hotels.js";
+import roomsRoute from "./routes/rooms.js";
+import usersRoute from "./routes/users.js";
+
 dotenv.config();
 const port = process.env.PORT || 3000;
-const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 const connect = async () => {
   try {
     const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
-    mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      // useUnifiedTopology: true,
-      strictQuery: true,
-    });
+    mongoose.set("strictQuery", true);
+    await mongoose.connect(MONGO_URI);
+
     console.log("Connected to MongoDB");
   } catch (err) {
-    console.error(errors);
+    console.error(err);
   }
 };
 
@@ -27,18 +32,12 @@ mongoose.connection.on("disconnected", () => {
 //Middleweres
 
 //Route Middleweres
-import authRoute from "./routes/auth.js";
-import hotelsRoute from "./routes/hotels.js";
-import roomsRoute from "./routes/rooms.js";
-import usersRoute from "./routes/users.js";
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
-const app = express();
-app.use(cors());
-app.use(express.json());
+
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong";
