@@ -6,15 +6,10 @@ import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import usersRoute from "./routes/users.js";
 import dotenv from "dotenv";
-dotenv.config();
 
 const app = express();
+dotenv.config();
 const port = process.env.PORT || 8800;
-
-//Middleweres
-app.use(express.json());
-app.use(cors());
-mongoose.set("strictQuery", false);
 
 const connect = async () => {
   try {
@@ -30,9 +25,10 @@ mongoose.connection.on("disconnected", () => {
   console.log("Disconnected from MongoDB");
 });
 
-mongoose.connection.on("connected", () => {
-  console.log("Connected to MongoDB 2");
-});
+//Middleweres
+app.use(cors());
+app.use(express.json());
+mongoose.set("strictQuery", false);
 
 //Route Middleweres
 app.use("/api/auth", authRoute);
@@ -50,10 +46,6 @@ app.use((err, req, res, next) => {
     message: errorMessage,
     stack: err.stack,
   });
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
 });
 
 app.listen(port, () => {
