@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
 const connect = async () => {
   try {
-    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
+    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority&ssl=true`;
     mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useFindAndModify: false,
