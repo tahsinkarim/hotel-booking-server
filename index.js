@@ -17,7 +17,7 @@ const connect = async () => {
     await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useFindAndModify: false,
-      useUnifiedTopology: true,
+      // useUnifiedTopology: true,
       strictQuery: true,
     });
     console.log("Connected to MongoDB");
@@ -50,10 +50,6 @@ app.use((err, req, res, next) => {
     message: errorMessage,
     stack: err.stack,
   });
-});
-
-app.get("/", function (req, res) {
-  res.json(MONGO_URI);
 });
 
 app.listen(port, () => {
