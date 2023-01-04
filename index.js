@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/", function (req, res) {
-  res.json("hello world");
+  res.json(MONGO_URI);
 });
 
 app.listen(port, () => {
