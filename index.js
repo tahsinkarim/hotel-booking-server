@@ -10,7 +10,7 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 3000;
-
+const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
 const connect = async () => {
   try {
     const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.k6fgqcn.mongodb.net/bookingHotel?retryWrites=true&w=majority`;
@@ -50,6 +50,10 @@ app.use((err, req, res, next) => {
     message: errorMessage,
     stack: err.stack,
   });
+});
+
+app.get("/", function (req, res) {
+  console.log(MONGO_URI);
 });
 
 app.listen(port, () => {
